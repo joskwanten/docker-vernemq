@@ -12,12 +12,9 @@ VerneMQ is an Apache2 licensed distributed MQTT broker, developed in Erlang.
 
 ## How to use this image
 
-### 1. Accepting the VerneMQ EULA
+### 1. VerneMQ EULA
 
-**NOTE:** To use the official Docker images you have to accept the [VerneMQ End
-User License Agreement](https://vernemq.com/end-user-license-agreement). You can
-read how to accept the VerneMQ EULA
-[here](https://docs.vernemq.com/installation/accepting-the-vernemq-eula).
+The docker container is a multi-stage docker container. The first container will build the binaries and the second will be the container in which VerneMQ will be running. By not using official binaries or dockers, we don't violate the VerneMQ EULA.
 
 ### 2. Using [Helm](https://helm.sh/) to deploy on [Kubernetes](https://kubernetes.io/)
 
