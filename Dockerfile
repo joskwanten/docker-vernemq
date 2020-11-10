@@ -1,13 +1,14 @@
-FROM debian:buster
-RUN apt-get update 
+FROM debian:bullseye
+RUN apt-get update -y 
 RUN apt-get install -y git
 RUN apt-get install -y erlang
 RUN apt-get install -y libsnappy-dev
 RUN apt-get install -y build-essential
 RUN apt-get install -y libssl-dev
+RUN apt-get install -y curl 
 WORKDIR /
-ADD https://api.github.com/repos/joskwanten/vernemq/git/refs/heads/feature/set-mqtt-connect-timeout version.json
-RUN git clone -b feature/set-mqtt-connect-timeout https://github.com/joskwanten/vernemq.git
+#ADD https://api.github.com/repos/joskwanten/vernemq/git/refs/heads/feature/set-mqtt-connect-timeout version.json
+RUN git clone https://github.com/joskwanten/vernemq.git
 # RUN git clone https://github.com/joskwanten/vernemq.git
 WORKDIR /vernemq
 RUN make rel
@@ -28,7 +29,7 @@ WORKDIR /vernemq
 ENV DOCKER_VERNEMQ_KUBERNETES_LABEL_SELECTOR="app=vernemq" \
     DOCKER_VERNEMQ_LOG__CONSOLE=console \
     PATH="/vernemq/bin:$PATH" \
-    VERNEMQ_VERSION="1.10.2"
+    VERNEMQ_VERSION="1.11.0"
 
 COPY --chown=10000:10000 bin/vernemq.sh /usr/sbin/start_vernemq
 COPY --chown=10000:10000 files/vm.args /vernemq/etc/vm.args
